@@ -8,8 +8,10 @@ generator client {
 }
 
 model Collection {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  data      String
+  id              String   @id @default(cuid())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  name            String   
+  collectionId    String   @unique
+  data            String
 }

@@ -7,10 +7,10 @@ export class CollectionsService {
   constructor(private prisma: PrismaService) {}
 
   async getCollection(
-    collectionWhereUniqueInput: Prisma.CollectionWhereUniqueInput
+    collectionWhereInput: Prisma.CollectionWhereInput
   ): Promise<Collection | null> {
-    return this.prisma.collection.findUnique({
-      where: collectionWhereUniqueInput,
+    return this.prisma.collection.findFirst({
+      where: collectionWhereInput,
     });
   }
 

@@ -8,8 +8,11 @@ export class CollectionsController {
   constructor(private readonly collectionsService: CollectionsService) {}
 
   @Get(":id")
-  async getCollection(@Param("id") id: string): Promise<Collection> {
-    const res = await this.collectionsService.getCollection({ id });
+  async getCollection(@Param("id") collectionId: string): Promise<Collection> {
+    const res = await this.collectionsService.getCollection({
+      collectionId: collectionId,
+    });
+    console.log(res);
     return res;
   }
 
@@ -19,6 +22,8 @@ export class CollectionsController {
   ): Promise<Collection> {
     const res = await this.collectionsService.createCollection({
       data: data.data,
+      name: data.name,
+      collectionId: data.collectionId,
     });
     return res;
   }

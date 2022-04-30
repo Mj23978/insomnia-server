@@ -29,7 +29,6 @@
     "migrate:deploy": "npx prisma migrate deploy --preview-feature",
     "prisma:studio": "npx prisma studio",
     "prisma:generate": "npx prisma generate",
-    "test": "jest",
     "test:watch": "jest --watch",
     "start:db": "npm run migrate:up && npm run prisma:generate && npm run seed",
     "seed": "prisma db seed",
