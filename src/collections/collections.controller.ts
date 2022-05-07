@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { Collection } from "@prisma/client";
 import { CollectionsService } from "./collections.service";
 import { CreateCollectionInput } from "./dto/createPost.input";
@@ -8,12 +8,16 @@ export class CollectionsController {
   constructor(private readonly collectionsService: CollectionsService) {}
 
   @Get(":id")
-  async getCollection(@Param("id") collectionId: string): Promise<Collection> {
+  async getCollection(
+    @Param("id") collectionId: string,
+    @Query("raw") raw: boolean
+  ): Promise<Collection | any> {
     const res = await this.collectionsService.getCollection({
       collectionId: collectionId,
     });
     console.log(res);
-    return res;
+    // return raw ? JSON.parse(res.data) : res;
+    return raw ? res.data : res;
   }
 
   @Post()
