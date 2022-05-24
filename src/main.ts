@@ -9,6 +9,7 @@ import type {
   NestConfig,
   SwaggerConfig,
 } from "src/common/configs/config.interface";
+import { json } from "express";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -28,6 +29,7 @@ async function bootstrap() {
   const nestConfig = configService.get<NestConfig>("nest");
   const corsConfig = configService.get<CorsConfig>("cors");
   const swaggerConfig = configService.get<SwaggerConfig>("swagger");
+  app.use(json({ limit: "50mb" }));
 
   // Swagger Api
   if (swaggerConfig.enabled) {

@@ -19,10 +19,12 @@ export class AppController {
   @Put()
   putHello(@Body() body, @Response() res: Res): Res<any, any> {
     console.log(body);
-    return res
-      .set({ override: "false" })
-      // .status(405)
-      .json({ org: "intern_21" });
+    return (
+      res
+        .set({ override: "false" })
+        // .status(405)
+        .json({ org: "intern_21" })
+    );
     // return res.set({ override: "false" }).json(r);
   }
 

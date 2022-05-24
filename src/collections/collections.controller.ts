@@ -24,11 +24,27 @@ export class CollectionsController {
   async createCollection(
     @Body() data: CreateCollectionInput
   ): Promise<Collection> {
-    const res = await this.collectionsService.createCollection({
-      data: data.data,
-      name: data.name,
+    const exists = await this.collectionsService.getCollection({
       collectionId: data.collectionId,
     });
-    return res;
+    if (exists !== undefined) {
+      const res = await this.collectionsService.updateCollection({
+        where: {
+          collectionId: data.collectionId,
+        },
+        data: {
+          data: data.data,
+          name: data.name,
+        },
+      });
+      return res;
+    } else {
+      const res = await this.collectionsService.createCollection({
+        data: data.data,
+        name: data.name,
+        collectionId: data.collectionId,
+      });
+      return res;
+    }
   }
 }
